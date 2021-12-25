@@ -2,41 +2,64 @@ import React, {useState} from "react";
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { colors } from '../../assets/values/colors';
 import { defaultDimensions } from "../../assets/values/defaultDimensions";
+import ListingItemModal from "./ListingItemModal";
 import { img } from "../../assets/values/tempImage";
+import relativeDate from "relative-date";
+
 /* Device dimensions, use to optimize for device of all sizes */
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 
 const ListingItem = (props) => {
+    //'../../assets/images/bookmark-off.png'
+    const bookmarks = {
+        on: require('../../assets/images/bookmark-on.png'),
+        off: require('../../assets/images/bookmark-off.png'),
+    }
+
+    const [isBookMarked, setIsBookMarked] = useState(props.isBookmarked ? true : false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const handleBookMarkClick = () => {
+        setIsBookMarked(!isBookMarked);
+        console.log('bookmark clicked');
+    }
+    const handleListingClick = () => {
+        console.log('listing clicked');
+        setIsModalOpen(!isModalOpen);
+    }
     
+
     return (
-        <View style={styles.ListingItem}>
-            <Image style={styles.listingImage} source={img}></Image>
-            <View style={styles.listingDetails}>
-                <Text numberOfLines={1} style={styles.listingTitle}>For Earth's Sake - Towards a Passionate Ecology</Text>
-                <View style={styles.listingDetailItemWrapper}>
-                    <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-author.png')}></Image>
-                    <Text numberOfLines={1} style={styles.listingText}>Steven Scharper & Simon Appoloni</Text>
+        <View>
+            {isModalOpen && (<ListingItemModal item={props.item} handleListingClick={handleListingClick} isModalOpen={isModalOpen}></ListingItemModal>)}
+            <TouchableOpacity activeOpacity={0.9} style={styles.ListingItem} onPress={() => handleListingClick()}>
+                <Image style={styles.listingImage} source={props.item.image}></Image>
+                <View style={styles.listingDetails}>
+                    <Text numberOfLines={1} style={styles.listingTitle}>{props.item.title}</Text>
+                    <View style={styles.listingDetailItemWrapper}>
+                        <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-author.png')}></Image>
+                        <Text numberOfLines={1} style={styles.listingText}>{props.item.author}</Text>
+                    </View>
+                    <View style={styles.listingDetailItemWrapper}>
+                        <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-isbn.png')}></Image>
+                        <Text numberOfLines={1} style={styles.listingText}>{props.item.isbn}</Text>
+                    </View>
+                    <View style={styles.listingDetailItemWrapper}>
+                        <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-course.png')}></Image>
+                        <Text numberOfLines={1} style={styles.listingText}>{props.item.courseCode}</Text>
+                    </View>
+                    <View style={styles.listingDetailItemWrapper}>
+                        <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-seller.png')}></Image>
+                        <Text numberOfLines={1} style={[styles.listingText, {paddingRight: 90}]}>{props.item.sellerName}</Text>
+                    </View>
+                    <Text style={styles.timeStamp}>posted {relativeDate(props.item.uploadTimeStamp)}</Text>
                 </View>
-                <View style={styles.listingDetailItemWrapper}>
-                    <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-isbn.png')}></Image>
-                    <Text numberOfLines={1} style={styles.listingText}>9782896465217</Text>
+                <View style={styles.listingPriceAndBookmark}>
+                    <Text style={styles.listingPrice}>${props.item.price}</Text>
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => handleBookMarkClick()}><Image style={styles.listingBookmark} source={isBookMarked ? bookmarks.on : bookmarks.off}></Image></TouchableOpacity>
                 </View>
-                <View style={styles.listingDetailItemWrapper}>
-                    <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-course.png')}></Image>
-                    <Text numberOfLines={1} style={styles.listingText}>ENV100</Text>
-                </View>
-                <View style={styles.listingDetailItemWrapper}>
-                    <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-seller.png')}></Image>
-                    <Text numberOfLines={1} style={styles.listingText}>Parth Patel</Text>
-                </View>
-                <Text style={styles.timeStamp}>posted 10hrs ago</Text>
-            </View>
-            <View style={styles.listingPriceAndBookmark}>
-                <Text style={styles.listingPrice}>$15</Text>
-                <TouchableOpacity><Image style={styles.listingBookmark} source={require('../../assets/images/bookmark-off.png')}></Image></TouchableOpacity>
-            </View>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -47,7 +70,6 @@ const styles = StyleSheet.create({
         width: width - 20,
         height: defaultDimensions.listing.height,
         marginLeft: 10,
-        backgroundColor: '#777',
         borderRadius: defaultDimensions.listing.borderRadius,
         flexDirection: 'row',
         elevation: 15,
@@ -73,11 +95,12 @@ const styles = StyleSheet.create({
     },
     listingText: {
         fontFamily: defaultDimensions.listing.description.fontFamily,
-        paddingRight: 4,
+        paddingRight: 8,
         fontSize: defaultDimensions.listing.description.fontSize,
     },
     listingDetailItemWrapper: {
         flexDirection: 'row',
+        paddingRight: 8,
     },
     listingDetailItemIcon: {
         height: defaultDimensions.listing.description.fontSize,
