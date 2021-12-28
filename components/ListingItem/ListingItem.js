@@ -34,7 +34,7 @@ const ListingItem = (props) => {
         <View>
             {isModalOpen && (<ListingItemModal item={props.item} handleListingClick={handleListingClick} isModalOpen={isModalOpen}></ListingItemModal>)}
             <TouchableOpacity activeOpacity={0.9} style={styles.ListingItem} onPress={() => handleListingClick()}>
-                <Image style={styles.listingImage} source={props.item.image}></Image>
+                <Image style={styles.listingImage} source={{uri: props.item.image}}></Image>
                 <View style={styles.listingDetails}>
                     <Text numberOfLines={1} style={styles.listingTitle}>{props.item.title}</Text>
                     <View style={styles.listingDetailItemWrapper}>
@@ -57,7 +57,7 @@ const ListingItem = (props) => {
                 </View>
                 <View style={styles.listingPriceAndBookmark}>
                     <Text style={styles.listingPrice}>${props.item.price}</Text>
-                    <TouchableOpacity activeOpacity={0.7} onPress={() => handleBookMarkClick()}><Image style={styles.listingBookmark} source={isBookMarked ? bookmarks.on : bookmarks.off}></Image></TouchableOpacity>
+                    { !props.hideBookMark && (<TouchableOpacity activeOpacity={0.7} onPress={() => handleBookMarkClick()}><Image style={styles.listingBookmark} source={isBookMarked ? bookmarks.on : bookmarks.off}></Image></TouchableOpacity>)}
                 </View>
             </TouchableOpacity>
         </View>
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     ListingItem: {
         width: width - 20,
         height: defaultDimensions.listing.height,
-        marginLeft: 10,
         borderRadius: defaultDimensions.listing.borderRadius,
         flexDirection: 'row',
         elevation: 15,

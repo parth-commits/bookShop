@@ -34,10 +34,11 @@ const SavedPage = (props) => {
 const styles = StyleSheet.create({
     SavedPageWrapper: {
         width: width,
+        paddingLeft: 10,
         height: height - 90 - StatusBar.currentHeight,
     },
     appTitle: {
-        paddingLeft: 25,
+        paddingLeft: 15,
         color: colors.lightModeText,
         fontFamily: 'PS-bold',
         fontSize: 45,

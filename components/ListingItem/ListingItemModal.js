@@ -33,7 +33,7 @@ const ListingItemModal = (props) => {
                 <View style={styles.modalView}>
                     <View style={styles.scrollV}>
                         <ScrollView>
-                            <Image style={styles.listingImage} source={props.item.image}></Image>
+                            <Image style={styles.listingImage} source={{ uri: props.item.image }}></Image>
                             <View style={styles.listingDetails}>
                                 <Text style={styles.listingTitle}>{props.item.title}</Text>
                                 <Text style={styles.listingPrice}>${props.item.price}</Text>
