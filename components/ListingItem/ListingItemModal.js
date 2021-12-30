@@ -120,7 +120,12 @@ const styles = StyleSheet.create({
     },
     button: {
       borderRadius: 30,
-      padding: 12,
+      //padding: 12,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingRight: 20,
+      paddingLeft: 20,
       elevation: 2,
       marginLeft: 10,
     },

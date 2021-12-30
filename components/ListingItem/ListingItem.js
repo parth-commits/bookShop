@@ -36,24 +36,24 @@ const ListingItem = (props) => {
             <TouchableOpacity activeOpacity={0.9} style={styles.ListingItem} onPress={() => handleListingClick()}>
                 <Image style={styles.listingImage} source={{uri: props.item.image}}></Image>
                 <View style={styles.listingDetails}>
-                    <Text numberOfLines={1} style={styles.listingTitle}>{props.item.title}</Text>
+                    <Text numberOfLines={1} adjustsFontSizeToFit style={styles.listingTitle}>{props.item.title}</Text>
                     <View style={styles.listingDetailItemWrapper}>
                         <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-author.png')}></Image>
-                        <Text numberOfLines={1} style={styles.listingText}>{props.item.author}</Text>
+                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.listingText}>{props.item.author}</Text>
                     </View>
                     <View style={styles.listingDetailItemWrapper}>
                         <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-isbn.png')}></Image>
-                        <Text numberOfLines={1} style={styles.listingText}>{props.item.isbn}</Text>
+                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.listingText}>{props.item.isbn}</Text>
                     </View>
                     <View style={styles.listingDetailItemWrapper}>
                         <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-course.png')}></Image>
-                        <Text numberOfLines={1} style={styles.listingText}>{props.item.courseCode}</Text>
+                        <Text numberOfLines={1} adjustsFontSizeToFit style={styles.listingText}>{props.item.courseCode}</Text>
                     </View>
                     <View style={styles.listingDetailItemWrapper}>
                         <Image style={styles.listingDetailItemIcon} source={require('../../assets/images/listing-icon-seller.png')}></Image>
-                        <Text numberOfLines={1} style={[styles.listingText, {paddingRight: 90}]}>{props.item.sellerName}</Text>
+                        <Text numberOfLines={1} adjustsFontSizeToFit style={[styles.listingText, {paddingRight: 90}]}>{props.item.sellerName}</Text>
                     </View>
-                    <Text style={styles.timeStamp}>posted {relativeDate(props.item.uploadTimeStamp)}</Text>
+                    <Text style={styles.timeStamp} adjustsFontSizeToFit>posted {relativeDate(props.item.uploadTimeStamp)}</Text>
                 </View>
                 <View style={styles.listingPriceAndBookmark}>
                     <Text style={styles.listingPrice}>${props.item.price}</Text>
@@ -86,15 +86,18 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: defaultDimensions.listing.borderRadius,
         borderTopRightRadius: defaultDimensions.listing.borderRadius,
         padding: 4,
+        //overflow: 'hidden',
     },
     listingTitle: {
         fontFamily: defaultDimensions.listing.title.fontFamily,
         paddingRight: 4,
+        maxHeight: 25,
         fontSize: defaultDimensions.listing.title.fontSize,
     },
     listingText: {
         fontFamily: defaultDimensions.listing.description.fontFamily,
         paddingRight: 8,
+        maxHeight: 15,
         fontSize: defaultDimensions.listing.description.fontSize,
     },
     listingDetailItemWrapper: {
@@ -108,6 +111,7 @@ const styles = StyleSheet.create({
     timeStamp: {
         fontSize: defaultDimensions.listing.description.fontSize,
         fontFamily: 'PS-italic',
+        maxHeight: 15,
     },
     listingPrice: {
         

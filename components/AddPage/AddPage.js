@@ -74,6 +74,7 @@ const AddPage = (props) => {
                 </TouchableOpacity>
                 <Text style={styles.subtitle}>Title</Text>
                 <TextInput
+                adjustsFontSizeToFit
                 style={styles.titleInput}
                 placeholder="A great title!"
                 onChangeText={title => {
@@ -86,6 +87,7 @@ const AddPage = (props) => {
                 </TextInput>
                 <Text style={styles.subtitle}>Price</Text>
                 <TextInput
+                adjustsFontSizeToFit
                 style={styles.titleInput}
                 placeholder="What's the price?"
                 keyboardType='numeric'
@@ -100,6 +102,7 @@ const AddPage = (props) => {
                 </TextInput>
                 <Text style={styles.subtitle}>Author</Text>
                 <TextInput
+                adjustsFontSizeToFit
                 style={styles.titleInput}
                 placeholder="Who wrote it?"
                 onChangeText={author => {
@@ -112,6 +115,7 @@ const AddPage = (props) => {
                 </TextInput>
                 <Text style={styles.subtitle}>ISBN</Text>
                 <TextInput
+                adjustsFontSizeToFit
                 style={styles.titleInput}
                 keyboardType='numeric'
                 placeholder="psst, check the back!"
@@ -207,7 +211,12 @@ const styles = StyleSheet.create({
     button: {
       borderRadius: 30,
       width: width -20,
-      padding: 12,
+      //padding: 12,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingRight: 20,
+      paddingLeft: 20,
       marginBottom: 20,
       marginTop: 20,
       elevation: 2,
@@ -236,7 +245,7 @@ const styles = StyleSheet.create({
     titleInput: {
         width: width - 20,
         height: 50,
-        fontSize: 30,
+        fontSize: 25,
         color: colors.lightModeText,
         fontFamily: 'PS-bold',
         padding: 5,
@@ -254,7 +263,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: colors.lightModeText,
         fontFamily: 'PS-bold',
-        padding: 10,
         paddingLeft: 15,
         paddingRight: 15,
         borderRadius: 20,

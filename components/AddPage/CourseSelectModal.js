@@ -2,100 +2,12 @@ import React, {useState, useEffect} from "react";
 import { StyleSheet, Text, View, Dimensions, Image, TouchableOpacity, Modal, Pressable, ScrollView, Linking, StatusBar, TextInput, FlatList } from 'react-native';
 import { colors } from '../../assets/values/colors';
 import { defaultDimensions } from "../../assets/values/defaultDimensions";
-import RNSearchablePicker from 'react-native-searchable-picker';
-
+import { coursesData } from "../../assets/values/coursesData";
 
 /* Device dimensions, use to optimize for device of all sizes */
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-
-const coursesData = [
-    {
-      label: 'CSC209',
-      value: 'CSC209'
-    },
-    {
-      label: 'CSC207',
-      value: 'CSC207'
-    },
-    {
-      label: 'MAT235',
-      value: 'MAT235'
-    },
-    {
-      label: 'ENV100',
-      value: 'ENV100'
-    },
-    {
-      label: 'ENV200',
-      value: 'ENV200'
-    },
-    {
-      label: 'MAT137',
-      value: 'MAT137'
-    },
-    {
-      label: 'CSC369',
-      value: 'CSC369'
-    },
-    {
-      label: 'CSC373',
-      value: 'CSC373'
-    },
-    {
-      label: 'STA247',
-      value: 'STA247'
-    },
-    {
-      label: 'STA137',
-      value: 'STA137'
-    },
-    {
-      label: 'RLG260',
-      value: 'RLG260'
-    },
-    {
-      label: 'RLG263',
-      value: 'RLG263'
-    },
-    {
-      label: 'GGR224',
-      value: 'GGR224'
-    },
-    {
-      label: 'NPS100',
-      value: 'NPS100'
-    },
-    {
-      label: 'PSY100',
-      value: 'PSY100'
-    },
-    {
-      label: 'BIO100',
-      value: 'BIO100'
-    },
-    {
-      label: 'CHM100',
-      value: 'CHM100'
-    },
-    {
-      label: 'CHM150',
-      value: 'CHM150'
-    },
-    {
-      label: 'CHM299',
-      value: 'CHM299'
-    },
-    {
-      label: 'CSC491',
-      value: 'CSC491'
-    },
-    {
-      label: 'MAT237',
-      value: 'MAT237'
-    },
-  ];
 
 const CourseSelectedModal = (props) => {
     
@@ -115,13 +27,7 @@ const CourseSelectedModal = (props) => {
 
     const searchCourses = (value) => {
         const filteredContacts = coursesData.filter(c => {
-          /* dont think i need
-          let contactLowercase = (
-            contact.firstName +
-            ' ' +
-            contact.lastName
-          ).toLowerCase();
-    */
+        
         let courseLowerCase = c.label.toLowerCase();
         let searchTermLowercase = value.toLowerCase();
     
@@ -162,7 +68,7 @@ const CourseSelectedModal = (props) => {
                             marginTop: 50
                             }}
                         >
-                            <Text style={{ color: '#bad555' }}>No Contacts Found</Text>
+                            <Text style={{ color: colors.lightModeText, fontSize: 25, fontFamily: 'PS-bold' }}>No Courses Found</Text>
                         </View>
                         )}
                     />
@@ -226,7 +132,12 @@ const styles = StyleSheet.create({
     },
     button: {
       borderRadius: 30,
-      padding: 12,
+      //padding: 12,
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingRight: 20,
+      paddingLeft: 20,
       elevation: 2,
       marginLeft: 10,
     },
